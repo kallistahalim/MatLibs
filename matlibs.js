@@ -1,12 +1,11 @@
 var inquirer = require("inquirer");
 
 function MatLib(noun, verb, adjective) {
-    this.noun = noun,
+        this.noun = noun,
         this.verb = verb,
         this.adjective = adjective,
-        this.Print = function () {
-            console.log("I have 10 [noun]. I will [verb] them [adjective]");
-        }
+        this.story = "I have 10 [noun]. I will [verb] them [adjective]"
+    
 }
 
 var questions = [{
@@ -23,6 +22,23 @@ var questions = [{
     }
 ]
 
+var noun = [];
+var verb = [];
+var adjective = [];
+
 inquirer.prompt(questions).then(function (answers) {
-    console.log(answers)
+    noun.push(answers.noun);
+    verb.push(answers.verb);
+    adjective.push(answers.adjective);
+
+    var matLib = new MatLib(answers.noun, answers.verb, answers.adjective);
+
+    matLib.story = matLib.story.replace("[noun]", answers.noun);
+    matLib.story = matLib.story.replace("[verb]", answers.verb);
+    matLib.story = matLib.story.replace("[adjective]", answers.adjective);
+    console.log(matLib.story);
+
 });
+
+
+
